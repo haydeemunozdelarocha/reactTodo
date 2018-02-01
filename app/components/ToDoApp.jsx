@@ -1,11 +1,13 @@
 var React = require('react');
 var TodoList = require('TodoList');
 var AddTodo = require('AddTodo');
-var TodoSearch = require('TodoSearch');
 var TodoAPI = require('TodoAPI');
+var Sidebar = require('Sidebar');
 
 var uuid = require('node-uuid');
 var moment = require('moment');
+import '../styles/app.scss';
+
 var TodoApp = React.createClass({
     getInitialState: function (){
     return{
@@ -39,7 +41,7 @@ var TodoApp = React.createClass({
       }]
     });
   },
-  handleSearch:function(showCompleted, searchText){
+    handleSearch:function(showCompleted, searchText){
     this.setState({
       showCompleted:showCompleted,
       searchText:searchText.toLowerCase()
@@ -48,7 +50,19 @@ var TodoApp = React.createClass({
 render: function() {
   var {todos,showCompleted,searchText} = this.state;
   var filteredTodos = TodoAPI.filteredTodos(todos,showCompleted,searchText);
-  return(<div><TodoSearch onSearch={this.handleSearch}/><TodoList todos = {filteredTodos} onToggle={this.handleToggle}/><AddTodo onAddTodo = {this.handleAddTodo}/></div>
+  return(
+        <div id="app">
+          <Sidebar handleSearch={this.handleSearch}/>
+          <div id="todolist">
+          <TodoList todos = {filteredTodos} onToggle={this.handleToggle}/>
+          <AddTodo onAddTodo = {this.handleAddTodo}/>
+          </div>
+          <div id="quotes">
+          <div id="image-container">
+            <img src="/images/1.jpg" />
+            </div>
+          </div>
+        </div>
   )
 }
 });

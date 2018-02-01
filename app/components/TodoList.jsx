@@ -1,5 +1,8 @@
 var React = require('react');
 var Todo = require('Todo');
+
+import '../styles/app.scss';
+
 var TodoList = React.createClass({
   render: function () {
     var {todos} = this.props;
@@ -12,7 +15,10 @@ var TodoList = React.createClass({
     };
     return(
       <div>
+      <h2>To Do</h2>
+      <div className="todos-container">
       {renderTodos()}
+      </div>
       </div>
       )
   }
